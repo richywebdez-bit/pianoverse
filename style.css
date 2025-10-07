@@ -20,7 +20,7 @@ header.hero {
   background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 3.5rem;
+  font-size: 3rem;
   animation: rainbow 6s linear infinite;
 }
 
@@ -30,8 +30,8 @@ header.hero {
 }
 
 .tagline {
-  font-size: 2rem;
-  color: white-smoke;
+  font-size: 1.2rem;
+  color: #444;
   margin-top: 0.5rem;
 }
 
@@ -39,7 +39,6 @@ nav {
   background: #f5f5f5;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  font-size:1rem;
 }
 
 nav ul {
@@ -134,7 +133,7 @@ body.dark-mode {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   border: none;
-  font-size: 1.4em;
+  font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
