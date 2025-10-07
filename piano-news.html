@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano News | PianoVerse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1 class="rainbow-text">🎵 PianoVerse News</h1>
+    <p class="tagline">Latest stories, discoveries & inspiration from the piano world</p>
+    <button id="refresh-btn" class="read-more" style="margin-top: 1rem;">🔄 Refresh News</button>
+  </header>
+
+  <main class="articles" id="news-container">
+    <p>Loading the latest piano stories...</p>
+  </main>
+
+  <footer>
+    <p>© 2025 PianoVerse | Every Key Tells a Story</p>
+  </footer>
+
+  <script>
+    // Fetch and display live piano news from RSS feeds
+    async function loadPianoNews() {
+      const feedUrls = [
+        'https://www.pianostreet.com/blog/feed',
+        'https://crosseyedpianist.com/feed',
+        'https://www.international-piano.com/rss.xml'
+      ];
+
+      const container = document.getElementById('news-container');
+      container.innerHTML = '<p>Loading the latest piano stories...</p>';
+
+      for (const url of feedUrls) {
+        try {
+          const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url));
+          const data = await response.json();
+
+          data.items.slice(0, 3).forEach(item => {
+            const article = document.createElement('article');
+            article.classList.add('article-card', 'visible');
+            article.innerHTML = `
+              <h2>${item.title}</h2>
+              <p>${item.description.substring(0, 200)}...</p>
+              <a href="${item.link}" target="_blank" class="read-more">Read full story →</a>
+            `;
+            container.appendChild(article);
+          });
+        } catch (error) {
+          console.error('Error fetching feed:', error);
+          container.innerHTML += `<p>⚠️ Unable to load feed from ${url}</p>`;
+        }
+      }
+    }
+
+    // Load on startup
+    loadPianoNews();
+
+    // Refresh button
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      loadPianoNews();
+    });
+  </script>
+</body>
+</html>
